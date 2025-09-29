@@ -1,34 +1,37 @@
-# Hackathon-UNAD
+# 🚀 Hackathon UNAD
 
-1. Entorno de desarrollo configurado
+## 1️⃣ Entorno de desarrollo configurado
 
-  IDE: IntelliJ (Java)
-  
-  Extensiones: GitLens, Prettier/ESLint, Postman/Thunder Client (para APIs).
-  
-  SDKs: Java (Spring Boot)
+- **IDE:** IntelliJ IDEA (Java)  
+- **Extensiones:**  
+  - GitLens  
+  - Prettier / ESLint  
+  - Postman / Thunder Client (para pruebas de APIs)  
+- **SDKs:**  
+  - Java (Spring Boot)  
 
+---
 
+## 2️⃣ Control de versiones
 
-2. Control de versiones
+- **Repositorio:** Git + GitHub (con ramas y estructura básica configurada).  
+- **Documentación:** `README.md` base listo para documentación rápida.  
 
-  Git + GitHub (repositorio listo, con ramas y estructura básica).
-  
-  Tener preparado un README.md base para documentar rápido.
+---
 
+## 3️⃣ Bases de datos rápidas
 
+- **SQLite** (ligero, ideal para prototipos).  
+- **PostgreSQL** (opción robusta y estructurada).  
 
-3. Bases de datos rápidas
+---
 
-  SQLite o PostgreSQL (para algo estructurado).
-  
-  
+## 4️⃣ Backend rápido
 
+- **Framework:** Spring Boot (Java).  
 
+---
 
-4. Backend rápido
-
-  Spring Boot (Java).
   
 
 
