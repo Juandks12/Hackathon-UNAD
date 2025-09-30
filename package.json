@@ -1,0 +1,27 @@
+{
+  "name": "hackathon-unad",
+  "version": "1.0.0",
+  "description": "## 1. Entorno de desarrollo configurado",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Juandks12/Hackathon-UNAD.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Juandks12/Hackathon-UNAD/issues"
+  },
+  "homepage": "https://github.com/Juandks12/Hackathon-UNAD#readme",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "body-parser": "^2.2.0",
+    "csv-writer": "^1.6.0",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2"
+  }
+}
