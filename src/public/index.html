@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AsistControlX - Control de Asistencia Empresarial</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/styles.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow fixed-top">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="#">AsistControlX</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link active" href="#">Inicio</a></li>
+          <li class="nav-item"><a class="btn btn-light ms-3" href="login.html">Iniciar Sesión</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="text-center text-white bg-primary py-5 mt-5">
+    <div class="container">
+      <h1 class="display-4 fw-bold">Bienvenido a AsistControlX</h1>
+      <p class="lead">La solución moderna para gestionar la asistencia de tu empresa de forma eficiente</p>
+      <a href="login.html" class="btn btn-light btn-lg mt-3">Acceder al sistema</a>
+    </div>
+  </header>
+
+  <!-- FEATURES -->
+  <section id="features" class="py-5">
+    <div class="container">
+      <h2 class="text-center mb-5 fw-bold">¿Por qué elegir AsistControlX?</h2>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="card border-0 shadow h-100 text-center p-3">
+            <h5 class="fw-bold">✔️ Registro Automático</h5>
+            <p>Los empleados pueden marcar entradas y salidas en segundos desde cualquier dispositivo.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card border-0 shadow h-100 text-center p-3">
+            <h5 class="fw-bold">📊 Reportes Globales</h5>
+            <p>Genera reportes por día o semana, con estadísticas de horas trabajadas y tardanzas.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card border-0 shadow h-100 text-center p-3">
+            <h5 class="fw-bold">🔒 Roles Seguros</h5>
+            <p>Panel diferenciado para administradores y empleados, con autenticación segura.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ESTADÍSTICAS -->
+  <section id="stats" class="bg-light py-5">
+    <div class="container text-center">
+      <h2 class="fw-bold mb-4">Impacto de AsistControlX</h2>
+      <div class="row g-4">
+        <div class="col-md-3">
+          <h3 class="fw-bold text-primary">+120</h3>
+          <p>Empresas activas</p>
+        </div>
+        <div class="col-md-3">
+          <h3 class="fw-bold text-primary">15,000</h3>
+          <p>Empleados registrados</p>
+        </div>
+        <div class="col-md-3">
+          <h3 class="fw-bold text-primary">98%</h3>
+          <p>Reducción en errores</p>
+        </div>
+        <div class="col-md-3">
+          <h3 class="fw-bold text-primary">24/7</h3>
+          <p>Soporte disponible</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIOS CON CARRUSEL -->
+  <section id="testimonios" class="py-5 bg-primary text-white">
+    <div class="container">
+      <h2 class="text-center fw-bold mb-4">Lo que dicen nuestros clientes</h2>
+      <div id="carouselTestimonios" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner text-center">
+          <div class="carousel-item active">
+            <blockquote class="blockquote">
+              <p>"Desde que usamos AsistControlX, la gestión del personal es más ágil y transparente."</p>
+              <footer class="blockquote-footer text-white">María Gómez, Gerente de RRHH</footer>
+            </blockquote>
+          </div>
+          <div class="carousel-item">
+            <blockquote class="blockquote">
+              <p>"Nos ahorramos horas de trabajo en reportes y eliminamos errores de cálculo."</p>
+              <footer class="blockquote-footer text-white">Carlos Rodríguez, Director Operativo</footer>
+            </blockquote>
+          </div>
+          <div class="carousel-item">
+            <blockquote class="blockquote">
+              <p>"Los empleados lo aman, es fácil de usar y muy intuitivo."</p>
+              <footer class="blockquote-footer text-white">Ana López, Coordinadora de Talento Humano</footer>
+            </blockquote>
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselTestimonios" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselTestimonios" data-bs-slide="next">
+          <span class="carousel-control-next-icon"></span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-dark text-white pt-4">
+    <div class="container">
+      <div class="row">
+        <!-- Info -->
+        <div class="col-md-4">
+          <h5 class="fw-bold">AsistControlX</h5>
+          <p>La plataforma que moderniza el control de asistencia en tu empresa.</p>
+        </div>
+        <!-- Links -->
+        <div class="col-md-4">
+          <h5 class="fw-bold">Enlaces rápidos</h5>
+          <ul class="list-unstyled">
+            <li><a href="#" class="text-white text-decoration-none">Inicio</a></li>
+            <li><a href="#features" class="text-white text-decoration-none">Características</a></li>
+            <li><a href="login.html" class="text-white text-decoration-none">Iniciar Sesión</a></li>
+          </ul>
+        </div>
+        <!-- Contacto -->
+        <div class="col-md-4">
+          <h5 class="fw-bold">Contacto</h5>
+          <p>Email: soporte@asistcontrolx.com</p>
+          <p>Tel: +57 310 123 4567</p>
+          <div>
+            <a href="#" class="text-white me-2"><i class="bi bi-facebook"></i></a>
+            <a href="#" class="text-white me-2"><i class="bi bi-twitter"></i></a>
+            <a href="#" class="text-white"><i class="bi bi-linkedin"></i></a>
+          </div>
+        </div>
+      </div>
+      <hr class="border-light">
+      <p class="text-center mb-0">© 2025 AsistControlX | Todos los derechos reservados</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
