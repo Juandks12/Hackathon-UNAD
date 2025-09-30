@@ -1,12 +1,9 @@
-const bcrypt = require("bcrypt");
+import mongoose from "mongoose";
 
-// Usuarios de ejemplo
-let users = [
-  { id: 1, username: "juan", password: bcrypt.hashSync("1234", 10), role: "employee" },
-  { id: 2, username: "ana", password: bcrypt.hashSync("1234", 10), role: "admin" }
-];
+const userSchema = new mongoose.Schema({
+  username: { type: String, required: true, unique: true, trim: true },
+  password: { type: String, required: true, minlength: 6 },
+  role: { type: String, enum: ["empleado", "admin"], default: "empleado" },
+});
 
-// Para contar intentos fallidos en sesión
-let loginAttempts = {};
-
-module.exports = { users, loginAttempts };
+export default mongoose.model("User", userSchema);

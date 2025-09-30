@@ -2,9 +2,10 @@
   "name": "hackathon-unad",
   "version": "1.0.0",
   "description": "## 1. Entorno de desarrollo configurado",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js"
   },
   "repository": {
     "type": "git",
@@ -18,10 +19,15 @@
   },
   "homepage": "https://github.com/Juandks12/Hackathon-UNAD#readme",
   "dependencies": {
-    "bcrypt": "^6.0.0",
     "body-parser": "^2.2.0",
     "csv-writer": "^1.6.0",
+    "dotenv": "^17.2.3",
     "express": "^5.1.0",
-    "jsonwebtoken": "^9.0.2"
-  }
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.18.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  },
+  "type": "module"
 }
