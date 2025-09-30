@@ -11,7 +11,6 @@
 ## 2. Control de versiones
 
 - Git + GitHub (repositorio listo, con ramas y estructura básica).  
-- Tener preparado un README.md base para documentar rápido.  
 
 ---
 
