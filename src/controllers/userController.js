@@ -1,4 +1,5 @@
 import User from "../models/users.js";
+import bcrypt from "bcryptjs";
 
 // Crear un nuevo usuario (solo admin)
 export const createUser = async (req, res) => {
@@ -9,11 +10,24 @@ export const createUser = async (req, res) => {
   }
 
   if (role && !["empleado", "admin"].includes(role)) {
-    return res.status(400).json({ message: "'role' inválido" });
+    return res.status(400).json({ message: "'role' inválido. Use 'empleado' o 'admin'" });
   }
 
   try {
-    const user = await User.create({ username, password, role });
+    // Verificar si el usuario ya existe
+    const existingUser = await User.findOne({ username });
+    if (existingUser) {
+      return res.status(409).json({ message: "El nombre de usuario ya existe" });
+    }
+
+    // Hashear la contraseña
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const user = await User.create({
+      username,
+      password: hashedPassword,
+      role: role || "empleado",
+    });
 
     return res.status(201).json({
       id: user._id,
@@ -26,7 +40,7 @@ export const createUser = async (req, res) => {
       return res.status(409).json({ message: "El nombre de usuario ya existe" });
     }
 
-    return res.status(500).json({ message: "Error al crear usuario" });
+    return res.status(500).json({ message: "Error al crear usuario", error: error.message });
   }
 };
 

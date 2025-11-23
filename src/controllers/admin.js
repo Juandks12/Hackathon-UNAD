@@ -1,25 +1,63 @@
-// controllers/admin.js
-const User = require("../models/users");
-const Record = require("../models/records");
+import User from "../models/users.js";
+import Attendance from "../models/attendance.js";
+import bcrypt from "bcryptjs";
 
-// Crear usuario (alta)
-exports.createUser = async (req, res) => {
+// Crear usuario (alta) - solo admin
+export const createUser = async (req, res) => {
   try {
     const { username, password, role } = req.body;
-    const user = new User({ username, password, role });
+
+    if (!username || !password) {
+      return res.status(400).json({ message: "Username y password son obligatorios" });
+    }
+
+    // Verificar si ya existe
+    const existingUser = await User.findOne({ username });
+    if (existingUser) {
+      return res.status(400).json({ message: "El usuario ya existe" });
+    }
+
+    // Hashear la contraseña
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const user = new User({
+      username,
+      password: hashedPassword,
+      role: role || "empleado",
+    });
+
     await user.save();
-    res.status(201).json({ message: "Usuario creado correctamente", user });
+
+    // No devolver la contraseña
+    const userResponse = {
+      id: user._id,
+      username: user.username,
+      role: user.role,
+    };
+
+    res.status(201).json({ message: "Usuario creado correctamente", user: userResponse });
   } catch (err) {
     res.status(400).json({ message: "Error al crear usuario", error: err.message });
   }
 };
 
 // Editar usuario
-exports.updateUser = async (req, res) => {
+export const updateUser = async (req, res) => {
   try {
     const { id } = req.params;
     const updates = req.body;
-    const user = await User.findByIdAndUpdate(id, updates, { new: true });
+
+    // Si se actualiza la contraseña, hashearla
+    if (updates.password) {
+      updates.password = await bcrypt.hash(updates.password, 10);
+    }
+
+    const user = await User.findByIdAndUpdate(id, updates, { new: true }).select("-password");
+    
+    if (!user) {
+      return res.status(404).json({ message: "Usuario no encontrado" });
+    }
+
     res.json({ message: "Usuario actualizado", user });
   } catch (err) {
     res.status(400).json({ message: "Error al actualizar usuario", error: err.message });
@@ -27,10 +65,15 @@ exports.updateUser = async (req, res) => {
 };
 
 // Eliminar usuario (baja)
-exports.deleteUser = async (req, res) => {
+export const deleteUser = async (req, res) => {
   try {
     const { id } = req.params;
-    await User.findByIdAndDelete(id);
+    const user = await User.findByIdAndDelete(id);
+    
+    if (!user) {
+      return res.status(404).json({ message: "Usuario no encontrado" });
+    }
+
     res.json({ message: "Usuario eliminado" });
   } catch (err) {
     res.status(400).json({ message: "Error al eliminar usuario", error: err.message });
@@ -38,9 +81,9 @@ exports.deleteUser = async (req, res) => {
 };
 
 // Listar todos los usuarios
-exports.listUsers = async (req, res) => {
+export const listUsers = async (req, res) => {
   try {
-    const users = await User.find({}, "-password"); // sin mostrar contraseñas
+    const users = await User.find({}, "-password").sort({ username: 1 });
     res.json(users);
   } catch (err) {
     res.status(400).json({ message: "Error al listar usuarios", error: err.message });
@@ -48,69 +91,26 @@ exports.listUsers = async (req, res) => {
 };
 
 // Ver fichajes por empleado y fecha
-exports.getRecordsByUser = async (req, res) => {
+export const getRecordsByUser = async (req, res) => {
   try {
     const { userId } = req.params;
     const { startDate, endDate } = req.query;
 
     const filter = { user: userId };
     if (startDate && endDate) {
-      filter.date = { $gte: new Date(startDate), $lte: new Date(endDate) };
+      filter.checkIn = {
+        $gte: new Date(startDate),
+        $lte: new Date(endDate),
+      };
     }
 
-    const records = await Record.find(filter).populate("user", "username");
+    const records = await Attendance.find(filter)
+      .populate("user", "username")
+      .sort({ checkIn: -1 });
+
     res.json(records);
   } catch (err) {
     res.status(400).json({ message: "Error al obtener fichajes", error: err.message });
-  }
-};
-
-// Editar un fichaje
-exports.updateRecord = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const updates = req.body;
-    const record = await Record.findByIdAndUpdate(id, updates, { new: true });
-    res.json({ message: "Fichaje actualizado", record });
-  } catch (err) {
-    res.status(400).json({ message: "Error al actualizar fichaje", error: err.message });
-  }
-};
-
-
-// Reporte global
-exports.globalReport = async (req, res) => {
-  try {
-    const { type, date } = req.query; // type: day | week
-    let start, end;
-
-    if (type === "day") {
-      start = new Date(date);
-      end = new Date(date);
-      end.setHours(23, 59, 59, 999);
-    } else if (type === "week") {
-      start = new Date(date);
-      start.setDate(start.getDate() - start.getDay()); // inicio semana
-      end = new Date(start);
-      end.setDate(end.getDate() + 6); // fin semana
-    } else {
-      return res.status(400).json({ message: "Tipo de reporte inválido" });
-    }
-
-    const records = await Record.find({ date: { $gte: start, $lte: end } }).populate("user", "username role");
-
-    // Totales
-    const totalAsistencias = records.length;
-    const tardanzas = records.filter(r => r.isLate).length;
-
-    res.json({
-      periodo: { start, end },
-      totalAsistencias,
-      tardanzas,
-      registros: records
-    });
-  } catch (err) {
-    res.status(400).json({ message: "Error al generar reporte", error: err.message });
   }
 };
 
